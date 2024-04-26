@@ -13,7 +13,7 @@ StandardError=inherit
 Restart=always
 RestartSec=10
 User=user1
-Environment="PYTHONPATH=/home/user1/.local/lib/python3.11/site-packages"
+Environment="PYTHONPATH=/home/<username>/.local/lib/python3.11/site-packages"
 
 [Install]
 WantedBy=multi-user.target
