@@ -10,7 +10,7 @@ dbus_session_bus_address = f'unix:path=/run/user/{user_id}/bus'
 os.environ['DBUS_SESSION_BUS_ADDRESS'] = dbus_session_bus_address
 
 TITLE = "Albert"
-APP_ICON = "/custom_notifier/media/img/alert.png"
+APP_ICON = "./alert.png"
 
 notification.notify(
     title=f"{TITLE} Activated (Custom Reminder)",
