@@ -5,47 +5,29 @@ import sys
 sys.path.append('/home/user1/.local/lib/python3.11/site-packages/plyer')
 from plyer import notification
 
-user_id = os.getuid()
-dbus_session_bus_address = f'unix:path=/run/user/{user_id}/bus'
-os.environ['DBUS_SESSION_BUS_ADDRESS'] = dbus_session_bus_address
+os.environ['DBUS_SESSION_BUS_ADDRESS'] = f'unix:path=/run/user/{os.getuid()}/bus'
 
 TITLE = "Albert"
-APP_ICON = "./alert.png"
 
-notification.notify(
-    title=f"{TITLE} Activated (Custom Reminder)",
-    message="Hi! I will remind you of some important daily tasks.",
-    timeout=15, app_icon=APP_ICON)
+def notify(msg, title=TITLE, timeout=15):
+    notification.notify(title=title, message=msg, timeout=timeout)
+
+ALERTS = {
+    "startup": "Hi! I will remind you of some important daily tasks.",
+    "default": "Don't forget to drink water. Keep yourself hydrated!",
+    17: "It's a Tea Time. Take a break and enjoy a cup of tea.",
+    13: "It's a Lunch Time. I'm gonna have some pan cakes. And you?",
+    0: "It's too late. You should sleep now.",
+    20: "It's dinner time. What are you having today?",
+}
+
+notify(title=f"{TITLE} Activated", msg=ALERTS.get("startup"), timeout=10)
 time.sleep((60 - datetime.now().minute) * 60)
 
 while True:
-    current_hour = datetime.now().hour
-
-    if current_hour == 17:
-        notification.notify(
-            title=TITLE,
-            message="It's a Tea Time. Take a break and enjoy a cup of tea.",
-            timeout=20, app_icon=APP_ICON)
-    elif current_hour == 13:
-        notification.notify(
-            title=TITLE,
-            message='''It's a Lunch Time. I'm gonna have some
-            pan cakes. And you?''',
-            timeout=20, app_icon=APP_ICON)
-    elif current_hour == 0:
-        notification.notify(
-            title=TITLE,
-            message="It's too late. You should sleep now.",
-            timeout=20, app_icon=APP_ICON)
-    elif current_hour == 20:
-        notification.notify(
-            title=TITLE,
-            message="It's dinner time. What are you having today?",
-            timeout=20, app_icon=APP_ICON)
+    hrs_now = datetime.now().hour
+    if ALERTS.get(hrs_now):
+        notify(msg=ALERTS.get(hrs_now))
     else:
-        notification.notify(
-            title=TITLE,
-            message="Don't forget to drink water. Keep yourself hydrated!",
-            timeout=20, app_icon=APP_ICON)
-
+        notify(msg=ALERTS.get("default"))
     time.sleep(60 * 60)
