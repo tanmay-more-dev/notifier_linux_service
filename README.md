@@ -14,7 +14,7 @@ A custom made notifier service for linux OS(with systemd). It gives you system n
   	To:  
   		`ExecStart=/usr/bin/python3 <PATH TO custom_notifier.py>`  
 6. Copy customnotifier.service to /etc/systemd/system/
-7. Reload the system daemon using systemctl daemon-reload
+7. Reload the system daemon using `systemctl daemon-reload`
 8. Start and enable the service  
      `systemctl start customnotifier.service`  
      `systemctl enable customnotifier.service`
