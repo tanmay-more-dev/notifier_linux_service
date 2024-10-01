@@ -2,7 +2,7 @@ import os
 import time
 from datetime import datetime
 import sys
-sys.path.append('/home/user1/.local/lib/python3.11/site-packages/plyer')
+sys.path.append('/home/user/.local/lib/python3.11/site-packages/plyer')
 from plyer import notification
 
 os.environ['DBUS_SESSION_BUS_ADDRESS'] = f'unix:path=/run/user/{os.getuid()}/bus'
