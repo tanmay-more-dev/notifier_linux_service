@@ -7,7 +7,7 @@ A custom made notifier service for linux OS(with systemd). It gives you system n
 1. Clone the repo
 2. Install python
 3. Install plyer using pip
-4. Copy custom_notifier.py and alert.png to the desired path (keep both files in same directory)
+4. Copy/move custom_notifier.py to the desired path.
 5. Edit line no 9 of customnotifier.service:  
     From:  
   		`ExecStart=/usr/bin/python3 /custom_notifier/main.py`  
